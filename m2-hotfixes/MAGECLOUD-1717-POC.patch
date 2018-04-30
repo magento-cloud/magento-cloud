@@ -1,0 +1,380 @@
+Index: caudalie-eu/vendor/magento/framework/Css/PreProcessor/Adapter/Less/Processor.php
+===================================================================
+--- caudalie-eu.orig/vendor/magento/framework/Css/PreProcessor/Adapter/Less/Processor.php
++++ caudalie-eu/vendor/magento/framework/Css/PreProcessor/Adapter/Less/Processor.php
+@@ -40,23 +40,31 @@ class Processor implements ContentProces
+     private $temporaryFile;
+ 
+     /**
++     * @var \Magento\Framework\App\Console\Request
++     */
++    protected $_request;
++
++    /**
+      * Constructor
+      *
+      * @param LoggerInterface $logger
+      * @param State $appState
+      * @param Source $assetSource
+      * @param Temporary $temporaryFile
++     * @param \Magento\Framework\App\Console\Request $request
+      */
+     public function __construct(
+         LoggerInterface $logger,
+         State $appState,
+         Source $assetSource,
+-        Temporary $temporaryFile
++        Temporary $temporaryFile,
++        \Magento\Framework\App\Console\Request $request
+     ) {
+         $this->logger = $logger;
+         $this->appState = $appState;
+         $this->assetSource = $assetSource;
+         $this->temporaryFile = $temporaryFile;
++        $this->_request = $request;
+     }
+ 
+     /**
+@@ -82,10 +90,18 @@ class Processor implements ContentProces
+ 
+             $tmpFilePath = $this->temporaryFile->createFile($path, $content);
+ 
+-            gc_disable();
++//            if (!$this->_request->getParam(
++//                \Magento\Deploy\Console\DeployStaticOptions::DONT_LEAK_MEMORY_BUT_TAKE_LONGER)) {
++            if (static::getDoDisableGarbageCollector()) {
++                gc_disable();
++            }
+             $parser->parseFile($tmpFilePath, '');
+             $content = $parser->getCss();
+-            gc_enable();
++//            if (!$this->_request->getParam(
++//                \Magento\Deploy\Console\DeployStaticOptions::DONT_LEAK_MEMORY_BUT_TAKE_LONGER)) {
++            if (static::getDoDisableGarbageCollector()) {
++                gc_enable();
++            }
+ 
+             if (trim($content) === '') {
+                 $this->logger->warning('Parsed less file is empty: ' . $path);
+@@ -97,4 +113,16 @@ class Processor implements ContentProces
+             throw new ContentProcessorException(new Phrase($e->getMessage()));
+         }
+     }
++
++    private static $doDisableGarbageCollector = true;
++
++    public static function getDoDisableGarbageCollector(): bool
++    {
++        return static::$doDisableGarbageCollector;
++    }
++
++    public static function setDoDisableGarbageCollector(bool $doDisableGarbageCollector)
++    {
++        static::$doDisableGarbageCollector = $doDisableGarbageCollector;
++    }
+ }
+Index: caudalie-eu/vendor/magento/module-deploy/Console/DeployStaticOptions.php
+===================================================================
+--- caudalie-eu.orig/vendor/magento/module-deploy/Console/DeployStaticOptions.php
++++ caudalie-eu/vendor/magento/module-deploy/Console/DeployStaticOptions.php
+@@ -137,6 +137,21 @@ class DeployStaticOptions
+     const REFRESH_CONTENT_VERSION_ONLY = 'refresh-content-version-only';
+ 
+     /**
++     * Don't disable the garbage collector. (Disabling the garbage collector leaks memory, but is 25-33 % faster.)
++     */
++    const DONT_LEAK_MEMORY_BUT_TAKE_LONGER = 'dont-leak-memory-but-take-longer';
++
++    /**
++     * This is used by the child process to identify which package it should work on deploying.
++     */
++    const FORK_EXEC_PACKAGE_IDENTIFIER = 'fork-exec-package-identifier';
++
++    /**
++     * Set this option if we want to execute the child process in a different process space.
++     */
++    const EXEC_AFTER_FORK = 'exec-after-fork';
++
++    /**
+      * Deploy static command options list
+      *
+      * @return array
+@@ -242,6 +257,29 @@ class DeployStaticOptions
+                 InputArgument::IS_ARRAY,
+                 'Space-separated list of ISO-636 language codes for which to output static view files.'
+             ),
++            new InputOption(
++                self::DONT_LEAK_MEMORY_BUT_TAKE_LONGER,
++                null,
++                InputOption::VALUE_NONE,
++                'Don\'t disable the garbage collector (disabling the garbage collector leaks memory,'
++                . ' but is 25-33 % faster)'
++            ),
++            new InputOption(
++                self::EXEC_AFTER_FORK,
++                null,
++                InputOption::VALUE_NONE,
++                'Normally, if you have \'' . self::JOBS_AMOUNT . '\' greater than 1, the child'
++                . 'processes run in the copy of the processes space of its forked parent.'
++                . '  Use this option to exec a separate process for the'
++                . ' child process.  Using this option is safer because it prevents usages of parent\'s'
++                . ' file descriptors, but takes more time to run.'
++            ),
++            new InputOption(
++                self::FORK_EXEC_PACKAGE_IDENTIFIER,
++                null,
++                InputOption::VALUE_OPTIONAL,
++                'This option is used internally when \'' . self::JOBS_AMOUNT . '\' is greater than 1'
++            ),
+         ];
+     }
+ 
+Index: caudalie-eu/vendor/magento/module-deploy/Package/Package.php
+===================================================================
+--- caudalie-eu.orig/vendor/magento/module-deploy/Package/Package.php
++++ caudalie-eu/vendor/magento/module-deploy/Package/Package.php
+@@ -241,6 +241,7 @@ class Package
+      */
+     public function getFile($fileId)
+     {
++        $this->aggregateLazy();
+         return isset($this->files[$fileId]) ? $this->files[$fileId] : false;
+     }
+ 
+@@ -260,7 +261,7 @@ class Package
+         $deployedFilePath = $this->getPath() . '/'
+             . ($file->getModule() ? ($file->getModule() . '/') : '')
+             . $file->getDeployedFileName();
+-        $file->setDeployedFilePath($deployedFilePath);
++        // $file->setDeployedFilePath($deployedFilePath);
+ 
+         return $file->getFileId();
+     }
+@@ -288,6 +289,7 @@ class Package
+      */
+     public function getFiles()
+     {
++        $this->aggregateLazy();
+         return $this->files;
+     }
+ 
+@@ -320,9 +322,14 @@ class Package
+      */
+     public function deleteFile($fileId)
+     {
++        $this->aggregateLazy();
+         unset($this->files[$fileId]);
+     }
+ 
++
++    private $doLazyAggregate = true ;
++    private $doAggregateNeedsRunning = false;
++
+     /**
+      * Aggregate files from all parent packages
+      *
+@@ -331,14 +338,24 @@ class Package
+      * @param Package $parentPackage
+      * @return bool true on success
+      */
+-    public function aggregate(Package $parentPackage = null)
++    public function aggregate(Package $parentPackage = null, $justDoIt = false)
+     {
++        if ($this->doLazyAggregate && ! $justDoIt) {
++            $this->doAggregateNeedsRunning = true;
++            if ($parentPackage) {
++                $this->setParent($parentPackage);
++            }
++            return true;
++        }
++        $this->doAggregateNeedsRunning = false;
+         $inheritedFiles = $this->getParentFiles();
+         foreach ($inheritedFiles as $fileId => $file) {
+             /** @var PackageFile $file */
+             if (!$this->getFile($fileId)) {
+                 $file = clone $file;
+                 $file->setPackage($this);
++                //$this->addFile($file);
++                //$this->addFileToMap($file);
+             }
+         }
+         if ($parentPackage) {
+@@ -347,6 +364,12 @@ class Package
+         return true;
+     }
+ 
++    private function aggregateLazy() {
++        if ($this->doAggregateNeedsRunning) {
++            $this->aggregate($this->getParent(), true);
++        }
++    }
++
+     /**
+      * @param Package $parent
+      * @return bool
+@@ -364,6 +387,7 @@ class Package
+      */
+     public function getMap()
+     {
++        $this->aggregateLazy();
+         return $this->map;
+     }
+ 
+Index: caudalie-eu/vendor/magento/module-deploy/Process/Queue.php
+===================================================================
+--- caudalie-eu.orig/vendor/magento/module-deploy/Process/Queue.php
++++ caudalie-eu/vendor/magento/module-deploy/Process/Queue.php
+@@ -11,6 +11,7 @@ use Magento\Framework\App\ResourceConnec
+ use Psr\Log\LoggerInterface;
+ use Magento\Framework\App\State as AppState;
+ use Magento\Framework\Locale\ResolverInterface as LocaleResolver;
++use Magento\Deploy\Console\DeployStaticOptions;
+ 
+ /**
+  * Deployment Queue
+@@ -162,7 +163,7 @@ class Queue
+                 $this->assertAndExecute($name, $packages, $packageJob);
+             }
+             $this->logger->notice('.');
+-            sleep(3);
++            usleep(1000 * 250);
+             foreach ($this->inProgress as $name => $package) {
+                 if ($this->isDeployed($package)) {
+                     unset($this->inProgress[$name]);
+@@ -189,12 +190,12 @@ class Queue
+         $package = $packageJob['package'];
+         if ($package->getParent() && $package->getParent() !== $package) {
+             foreach ($packageJob['dependencies'] as $dependencyName => $dependency) {
+-                if (!$this->isDeployed($dependency)) {
++                if (!$this->isDeployedOrDeploying($dependency)) {
+                     $this->assertAndExecute($dependencyName, $packages, $packages[$dependencyName]);
+                 }
+             }
+         }
+-        if (!$this->isDeployed($package)
++        if (!$this->isDeployedOrDeploying($package)
+             && ($this->maxProcesses < 2 || (count($this->inProgress) < $this->maxProcesses))) {
+             unset($packages[$name]);
+             $this->execute($package);
+@@ -215,7 +216,7 @@ class Queue
+                 }
+             }
+             $this->logger->notice('.');
+-            sleep(5);
++            sleep(1);
+         }
+         if ($this->isCanBeParalleled()) {
+             // close connections only if ran with forks
+@@ -238,6 +239,17 @@ class Queue
+      */
+     private function execute(Package $package)
+     {
++        $isThisChildProcess = false;
++        if (!empty($this->options[DeployStaticOptions::FORK_EXEC_PACKAGE_IDENTIFIER])) {
++            $isThisChildProcess = true;
++            if ($this->options[DeployStaticOptions::FORK_EXEC_PACKAGE_IDENTIFIER] !== $package->getpath()) {
++                return true;
++            }
++        }
++
++        $packageOriginal = $package;
++        // Note: Cloning $package here so that we don't leak memory when the aggregate function is lazyily run.
++        $package = clone $package;
+         $this->lastJobStarted = time();
+         $this->logger->info(
+             "Execute: " . $package->getPath(),
+@@ -261,7 +273,7 @@ class Queue
+             }
+         );
+ 
+-        if ($this->isCanBeParalleled()) {
++        if ($this->isCanBeParalleled() && (! $isThisChildProcess)) {
+             $pid = pcntl_fork();
+             if ($pid === -1) {
+                 throw new \RuntimeException('Unable to fork a new process');
+@@ -274,11 +286,32 @@ class Queue
+             }
+ 
+             // process child process
+-            $this->inProgress = [];
+-            $this->deployPackageService->deploy($package, $this->options, true);
+-            exit(0);
++            if ( !isset($this->options[DeployStaticOptions::EXEC_AFTER_FORK] ) || !$this->options[DeployStaticOptions::EXEC_AFTER_FORK] ) {
++                $this->inProgress = [];
++                $this->deployPackageService->deploy($package, $this->options, true);
++                exit(0);
++            }
++            fclose(STDIN);
++            fclose(STDOUT);
++            //fclose(STDERR);
++            $arguments = $_SERVER["argv"];
++            $command = array_shift($arguments);
++            array_push(
++                $arguments,
++                sprintf(
++                    "--%s=%s",
++                    DeployStaticOptions::FORK_EXEC_PACKAGE_IDENTIFIER,
++                    $package->getpath()
++                )
++            );
++            pcntl_exec($command, $arguments);
++            throw \Error("pcntl_exec didn't work properly.  This line shouldn't get called");
+         } else {
+             $this->deployPackageService->deploy($package, $this->options);
++            $packageOriginal->setState(Package::STATE_COMPLETED);
++            if ($isThisChildProcess) {
++                exit(0);
++            }
+             return true;
+         }
+     }
+@@ -291,17 +324,30 @@ class Queue
+     {
+         if ($this->isCanBeParalleled()) {
+             if ($package->getState() === null) {
+-                $pid = pcntl_waitpid($this->getPid($package), $status, WNOHANG);
+-                if ($pid === $this->getPid($package)) {
+-                    $package->setState(Package::STATE_COMPLETED);
+-
+-                    unset($this->inProgress[$package->getPath()]);
+-                    return pcntl_wexitstatus($status) === 0;
++                $packagePid = $this->getPid($package);
++                if (null !== $packagePid) {
++                    $pid = pcntl_waitpid($packagePid, $status, WNOHANG);
++                    if ($pid === $packagePid) {
++                        $package->setState(Package::STATE_COMPLETED);
++                        unset($this->inProgress[$package->getPath()]);
++                        if (0 !== pcntl_wexitstatus($status)) {
++                            throw new \RuntimeException("Child process has failed with code " . pcntl_wexitstatus($status));
++                        }
++                        return true;
++                    }
+                 }
+                 return false;
+             }
+         }
+-        return $package->getState();
++        return Package::STATE_COMPLETED == $package->getState();
++    }
++
++    private function isDeployedOrDeploying(Package $package)
++    {
++        if ($this->isCanBeParalleled() && null === $package->getState() && null !== $this->getPid($package) ) {
++            return true;
++        }
++        return Package::STATE_COMPLETED == $package->getState();
+     }
+ 
+     /**
+@@ -323,6 +369,11 @@ class Queue
+         return time() - $this->lastJobStarted < $this->maxExecTime;
+     }
+ 
++    private function getPackageId(Package $package)
++    {
++        return $package->getLocale() . '/' . $package->getArea() . '/' . $package->getTheme();
++    }
++
+     /**
+      * Free resources
+      *
