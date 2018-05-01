@@ -1,7 +1,7 @@
-Index: caudalie-eu/vendor/magento/framework/Css/PreProcessor/Adapter/Less/Processor.php
+Index: magento-cloud-template/vendor/magento/framework/Css/PreProcessor/Adapter/Less/Processor.php
 ===================================================================
---- caudalie-eu.orig/vendor/magento/framework/Css/PreProcessor/Adapter/Less/Processor.php
-+++ caudalie-eu/vendor/magento/framework/Css/PreProcessor/Adapter/Less/Processor.php
+--- magento-cloud-template.orig/vendor/magento/framework/Css/PreProcessor/Adapter/Less/Processor.php
++++ magento-cloud-template/vendor/magento/framework/Css/PreProcessor/Adapter/Less/Processor.php
 @@ -40,23 +40,31 @@ class Processor implements ContentProces
      private $temporaryFile;
  
@@ -73,10 +73,10 @@ Index: caudalie-eu/vendor/magento/framework/Css/PreProcessor/Adapter/Less/Proces
 +        static::$doDisableGarbageCollector = $doDisableGarbageCollector;
 +    }
  }
-Index: caudalie-eu/vendor/magento/module-deploy/Console/DeployStaticOptions.php
+Index: magento-cloud-template/vendor/magento/module-deploy/Console/DeployStaticOptions.php
 ===================================================================
---- caudalie-eu.orig/vendor/magento/module-deploy/Console/DeployStaticOptions.php
-+++ caudalie-eu/vendor/magento/module-deploy/Console/DeployStaticOptions.php
+--- magento-cloud-template.orig/vendor/magento/module-deploy/Console/DeployStaticOptions.php
++++ magento-cloud-template/vendor/magento/module-deploy/Console/DeployStaticOptions.php
 @@ -137,6 +137,21 @@ class DeployStaticOptions
      const REFRESH_CONTENT_VERSION_ONLY = 'refresh-content-version-only';
  
@@ -129,10 +129,10 @@ Index: caudalie-eu/vendor/magento/module-deploy/Console/DeployStaticOptions.php
          ];
      }
  
-Index: caudalie-eu/vendor/magento/module-deploy/Package/Package.php
+Index: magento-cloud-template/vendor/magento/module-deploy/Package/Package.php
 ===================================================================
---- caudalie-eu.orig/vendor/magento/module-deploy/Package/Package.php
-+++ caudalie-eu/vendor/magento/module-deploy/Package/Package.php
+--- magento-cloud-template.orig/vendor/magento/module-deploy/Package/Package.php
++++ magento-cloud-template/vendor/magento/module-deploy/Package/Package.php
 @@ -241,6 +241,7 @@ class Package
       */
      public function getFile($fileId)
@@ -220,10 +220,10 @@ Index: caudalie-eu/vendor/magento/module-deploy/Package/Package.php
          return $this->map;
      }
  
-Index: caudalie-eu/vendor/magento/module-deploy/Process/Queue.php
+Index: magento-cloud-template/vendor/magento/module-deploy/Process/Queue.php
 ===================================================================
---- caudalie-eu.orig/vendor/magento/module-deploy/Process/Queue.php
-+++ caudalie-eu/vendor/magento/module-deploy/Process/Queue.php
+--- magento-cloud-template.orig/vendor/magento/module-deploy/Process/Queue.php
++++ magento-cloud-template/vendor/magento/module-deploy/Process/Queue.php
 @@ -11,6 +11,7 @@ use Magento\Framework\App\ResourceConnec
  use Psr\Log\LoggerInterface;
  use Magento\Framework\App\State as AppState;
@@ -378,3 +378,18 @@ Index: caudalie-eu/vendor/magento/module-deploy/Process/Queue.php
      /**
       * Free resources
       *
+Index: magento-cloud-template/setup/src/Magento/Setup/Console/Command/DeployStaticContentCommand.php
+===================================================================
+--- magento-cloud-template.orig/setup/src/Magento/Setup/Console/Command/DeployStaticContentCommand.php
++++ magento-cloud-template/setup/src/Magento/Setup/Console/Command/DeployStaticContentCommand.php
+@@ -104,6 +104,10 @@ class DeployStaticContentCommand extends
+     {
+         $time = microtime(true);
+ 
++        if ($input->getOption(Options::DONT_LEAK_MEMORY_BUT_TAKE_LONGER)) {
++            \Magento\Framework\Css\PreProcessor\Adapter\Less\Processor::setDoDisableGarbageCollector(false);
++        }
++
+         if (!$input->getOption(Options::FORCE_RUN) && $this->getAppState()->getMode() !== State::MODE_PRODUCTION) {
+             throw new LocalizedException(
+                 __(
