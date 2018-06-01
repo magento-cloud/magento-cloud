@@ -2,7 +2,7 @@
     "name": "magento/project-enterprise-edition",
     "description": "eCommerce Platform for Growth (Enterprise Edition)",
     "type": "project",
-    "version": "2.2.4",
+    "version": "2.2.5",
     "license": [
         "OSL-3.0",
         "AFL-3.0"
@@ -10,11 +10,11 @@
     "repositories": {
         "repo": {
             "type": "composer",
-            "url": "https://repo.magento.com"
+            "url": "https://connect20-qa01.magedevteam.com"
         }
     },
     "require": {
-        "magento/magento-cloud-metapackage": ">=2.2.4 <2.2.5"
+        "magento/magento-cloud-metapackage": ">=2.2.5 <2.2.6"
     },
     "config": {
         "use-include-path": true
