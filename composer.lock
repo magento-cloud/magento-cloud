@@ -4,16 +4,16 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "3a428afff56ee568f85e8fc88e1d1963",
+    "content-hash": "979ca5d97c32030fa8796b08ad4f0b50",
     "packages": [
         {
             "name": "amzn/amazon-pay-and-login-magento-2-module",
-            "version": "2.0.8",
+            "version": "2.0.9",
             "dist": {
                 "type": "zip",
-                "url": "https://connect20-qa01.magedevteam.com/archives/amzn/amazon-pay-and-login-magento-2-module/amzn-amazon-pay-and-login-magento-2-module-2.0.8.0.zip",
+                "url": "https://connect20-qa01.magedevteam.com/archives/amzn/amazon-pay-and-login-magento-2-module/amzn-amazon-pay-and-login-magento-2-module-2.0.9.0.zip",
                 "reference": null,
-                "shasum": "907c69cd0a4ea6df85554d239ac94bc45ad6b959"
+                "shasum": "23a4b4cea22ae7f40996af715cd6a1bf2cc1bcff"
             },
             "require": {
                 "amzn/amazon-pay-sdk-php": "^3.2.0",
@@ -1165,7 +1165,7 @@
         },
         {
             "name": "illuminate/config",
-            "version": "v5.6.23",
+            "version": "v5.6.24",
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/config.git",
@@ -1209,16 +1209,16 @@
         },
         {
             "name": "illuminate/container",
-            "version": "v5.6.23",
+            "version": "v5.6.24",
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/container.git",
-                "reference": "1a29b314dd5c7a5a5bce3dd7b9da924cc1ec22ec"
+                "reference": "1f0757cae8749400aeda730f6438a081fc3c082d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/illuminate/container/zipball/1a29b314dd5c7a5a5bce3dd7b9da924cc1ec22ec",
-                "reference": "1a29b314dd5c7a5a5bce3dd7b9da924cc1ec22ec",
+                "url": "https://api.github.com/repos/illuminate/container/zipball/1f0757cae8749400aeda730f6438a081fc3c082d",
+                "reference": "1f0757cae8749400aeda730f6438a081fc3c082d",
                 "shasum": ""
             },
             "require": {
@@ -1249,11 +1249,11 @@
             ],
             "description": "The Illuminate Container package.",
             "homepage": "https://laravel.com",
-            "time": "2018-05-14T12:49:42+00:00"
+            "time": "2018-05-24T13:16:56+00:00"
         },
         {
             "name": "illuminate/contracts",
-            "version": "v5.6.23",
+            "version": "v5.6.24",
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/contracts.git",
@@ -1297,16 +1297,16 @@
         },
         {
             "name": "illuminate/support",
-            "version": "v5.6.23",
+            "version": "v5.6.24",
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/support.git",
-                "reference": "7ba15bb00ac57c621e8291ce737ae7ea497ba02b"
+                "reference": "b13296a75443797d6a71d0ccd437ca801b12d300"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/illuminate/support/zipball/7ba15bb00ac57c621e8291ce737ae7ea497ba02b",
-                "reference": "7ba15bb00ac57c621e8291ce737ae7ea497ba02b",
+                "url": "https://api.github.com/repos/illuminate/support/zipball/b13296a75443797d6a71d0ccd437ca801b12d300",
+                "reference": "b13296a75443797d6a71d0ccd437ca801b12d300",
                 "shasum": ""
             },
             "require": {
@@ -1321,6 +1321,7 @@
             },
             "suggest": {
                 "illuminate/filesystem": "Required to use the composer class (5.6.*).",
+                "ramsey/uuid": "Required to use Str::uuid() (^3.7).",
                 "symfony/process": "Required to use the composer class (~4.0).",
                 "symfony/var-dumper": "Required to use the dd function (~4.0)."
             },
@@ -1350,7 +1351,7 @@
             ],
             "description": "The Illuminate Support package.",
             "homepage": "https://laravel.com",
-            "time": "2018-05-18T13:51:23+00:00"
+            "time": "2018-06-02T14:30:18+00:00"
         },
         {
             "name": "justinrainbow/json-schema",
@@ -1651,12 +1652,17 @@
         },
         {
             "name": "magento/ece-tools",
-            "version": "2002.0.11",
+            "version": "2002.0.x-dev",
+            "source": {
+                "type": "git",
+                "url": "git@github.com:magento/ece-tools.git",
+                "reference": "394eec2308eda2b291553094a2c982de2730e4b9"
+            },
             "dist": {
                 "type": "zip",
-                "url": "https://repo.magento.com/archives/magento/ece-tools/magento-ece-tools-2002.0.11.0.zip",
-                "reference": null,
-                "shasum": "5191e0956408d857a4edb5609656fb233f463450"
+                "url": "https://api.github.com/repos/magento/ece-tools/zipball/394eec2308eda2b291553094a2c982de2730e4b9",
+                "reference": "394eec2308eda2b291553094a2c982de2730e4b9",
+                "shasum": ""
             },
             "require": {
                 "composer/composer": "@stable",
@@ -1690,17 +1696,54 @@
                 "m2-ece-deploy",
                 "m2-ece-scd-dump"
             ],
-            "type": "library",
+            "type": "magento2-component",
+            "extra": {
+                "map": [
+                    [
+                        "dist/.magento.env.yaml",
+                        ".magento.env.yaml.dist"
+                    ],
+                    [
+                        "dist/config.env",
+                        "docker/config.env.dist"
+                    ],
+                    [
+                        "dist/global.env",
+                        "docker/global.env.dist"
+                    ]
+                ]
+            },
             "autoload": {
                 "psr-4": {
                     "Magento\\MagentoCloud\\": "src/"
                 }
             },
+            "autoload-dev": {
+                "psr-4": {
+                    "Magento\\MagentoCloud\\Test\\": "tests/static/",
+                    "Magento\\MagentoCloud\\Test\\Integration\\": "tests/integration/"
+                }
+            },
+            "scripts": {
+                "test": [
+                    "phpcs src --standard=tests/static/phpcs-ruleset.xml -p -n",
+                    "phpmd src xml tests/static/phpmd-ruleset.xml",
+                    "phpunit --configuration tests/unit",
+                    "phpunit --configuration tests/unit --coverage-clover tests/unit/tmp/clover.xml && php tests/unit/code-coverage.php tests/unit/tmp/clover.xml"
+                ],
+                "test-coverage-generate": [
+                    "phpunit --configuration tests/unit --coverage-html tests/unit/tmp/coverage"
+                ]
+            },
             "license": [
-                "OSL-3.0",
-                "AFL-3.0"
+                "proprietary"
             ],
-            "description": "Provides tools to build and deploy Magento 2 Enterprise Edition"
+            "description": "Provides tools to build and deploy Magento 2 Enterprise Edition",
+            "support": {
+                "source": "https://github.com/magento/ece-tools/tree/2002.0",
+                "issues": "https://github.com/magento/ece-tools/issues"
+            },
+            "time": "2018-06-05T13:02:11+00:00"
         },
         {
             "name": "magento/framework",
@@ -13966,9 +14009,18 @@
         }
     ],
     "packages-dev": [],
-    "aliases": [],
+    "aliases": [
+        {
+            "alias": "2002.0.12",
+            "alias_normalized": "2002.0.12.0",
+            "version": "2002.0.9999999.9999999-dev",
+            "package": "magento/ece-tools"
+        }
+    ],
     "minimum-stability": "alpha",
-    "stability-flags": [],
+    "stability-flags": {
+        "magento/ece-tools": 20
+    },
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": [],

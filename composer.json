@@ -12,9 +12,14 @@
             "type": "composer",
             "url": "https://connect20-qa01.magedevteam.com"
         }
+        , "magento/ece-tools": {
+            "type": "vcs",
+            "url": "git@github.com:magento/ece-tools.git"
+        }
     },
     "require": {
         "magento/magento-cloud-metapackage": ">=2.2.5 <2.2.6"
+        , "magento/ece-tools": "2002.0.x-dev as 2002.0.12"
     },
     "config": {
         "use-include-path": true
