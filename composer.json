@@ -11,10 +11,14 @@
         "repo": {
             "type": "composer",
             "url": "https://repo.magento.com"
+        },
+        "sandbox": {
+            "type": "composer",
+            "url": "https://connect20-qa01.magedevteam.com"
         }
     },
     "require": {
-        "magento/magento-cloud-metapackage": ">=2.2.6 <2.2.7"
+        "magento/magento-cloud-metapackage": ">=2.2.7 <2.2.8"
     },
     "config": {
         "use-include-path": true
