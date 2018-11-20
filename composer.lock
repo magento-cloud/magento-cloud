@@ -12331,7 +12331,7 @@
                 "type": "zip",
                 "url": "https://repo.magento.com/archives/vertex/module-tax/vertex-module-tax-2.2.1.0.zip",
                 "reference": null,
-                "shasum": "05a79335d191d5af36a65a8c99746e5f8189e9ab"
+                "shasum": "6bf1adc2c1973bc6aa854d17fb7072649d9aa7a6"
             },
             "require": {
                 "ext-simplexml": "*",
@@ -12392,7 +12392,7 @@
                 "type": "zip",
                 "url": "https://repo.magento.com/archives/vertex/sdk/vertex-sdk-1.0.0.0.zip",
                 "reference": null,
-                "shasum": "f57d48ec0d4f79bef9daefa5364c1e67d621e22c"
+                "shasum": "6c7ed091879e66d75faf95fed7e48751693c68c7"
             },
             "require": {
                 "ext-mbstring": "*",
