@@ -13,7 +13,6 @@ build:
 # Enable extensions required by Magento 2
 runtime:
     extensions:
-        - mcrypt
         - redis
         - xsl
         - json
