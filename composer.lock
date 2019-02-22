@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "1744095e1ea371410db4518d287f5c60",
+    "content-hash": "7babea52b9d16f3539f1e97417788367",
     "packages": [
         {
             "name": "braintree/braintree_php",
@@ -1292,16 +1292,16 @@
         },
         {
             "name": "magento/ece-tools",
-            "version": "2002.0.x-dev",
+            "version": "2002.0.16",
             "source": {
                 "type": "git",
                 "url": "https://github.com/magento/ece-tools.git",
-                "reference": "d19a304a518e6c721e34eefe6636336d65596a77"
+                "reference": "5419380f35c0a90346907bf98c1c717393e84c1b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/magento/ece-tools/zipball/d19a304a518e6c721e34eefe6636336d65596a77",
-                "reference": "d19a304a518e6c721e34eefe6636336d65596a77",
+                "url": "https://api.github.com/repos/magento/ece-tools/zipball/5419380f35c0a90346907bf98c1c717393e84c1b",
+                "reference": "5419380f35c0a90346907bf98c1c717393e84c1b",
                 "shasum": ""
             },
             "require": {
@@ -1401,10 +1401,10 @@
             ],
             "description": "Provides tools to build and deploy Magento 2 Enterprise Edition",
             "support": {
-                "source": "https://github.com/magento/ece-tools/tree/2002.0",
+                "source": "https://github.com/magento/ece-tools/tree/2002.0.16",
                 "issues": "https://github.com/magento/ece-tools/issues"
             },
-            "time": "2019-02-19T17:33:53+00:00"
+            "time": "2019-02-22T19:17:32+00:00"
         },
         {
             "name": "magento/framework",
@@ -12363,18 +12363,9 @@
         }
     ],
     "packages-dev": [],
-    "aliases": [
-        {
-            "alias": "2002.0.16",
-            "alias_normalized": "2002.0.16.0",
-            "version": "2002.0.9999999.9999999-dev",
-            "package": "magento/ece-tools"
-        }
-    ],
+    "aliases": [],
     "minimum-stability": "alpha",
-    "stability-flags": {
-        "magento/ece-tools": 20
-    },
+    "stability-flags": [],
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": [],
