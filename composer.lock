@@ -1736,12 +1736,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/magento/ece-tools.git",
-                "reference": "e7d957d5dac11734e1a87c9018bc344ee54d1396"
+                "reference": "b2896cc57424cd9cbcf4df70b5d5b61485018c79"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/magento/ece-tools/zipball/e7d957d5dac11734e1a87c9018bc344ee54d1396",
-                "reference": "e7d957d5dac11734e1a87c9018bc344ee54d1396",
+                "url": "https://api.github.com/repos/magento/ece-tools/zipball/b2896cc57424cd9cbcf4df70b5d5b61485018c79",
+                "reference": "b2896cc57424cd9cbcf4df70b5d5b61485018c79",
                 "shasum": ""
             },
             "require": {
@@ -1846,7 +1846,7 @@
                 "source": "https://github.com/magento/ece-tools/tree/2002.0",
                 "issues": "https://github.com/magento/ece-tools/issues"
             },
-            "time": "2019-05-03T15:03:20+00:00"
+            "time": "2019-05-06T20:32:50+00:00"
         },
         {
             "name": "magento/framework",
