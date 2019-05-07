@@ -10,5 +10,5 @@ redis:
     type: redis:3.0
 
 elasticsearch:
-    type: elasticsearch:6.5
+    type: elasticsearch:6.5-rc
     disk: 1024
