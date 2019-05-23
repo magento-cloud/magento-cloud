@@ -19,7 +19,7 @@
     ],
     "require": {
         "magento/magento-cloud-metapackage": ">=2.1.17 <2.1.18",
-        "magento/ece-tools": "2002.0.x-dev as 2002.0.18"
+        "magento/ece-tools": "2002.0.x-dev as 2002.0.19"
     },
     "config": {
         "use-include-path": true
