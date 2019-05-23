@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "777a006b867e7bd0e3a3b1c5c018ad10",
+    "content-hash": "6d1b4bfea5c2eac83a50d0530fa3bcd3",
     "packages": [
         {
             "name": "amzn/amazon-pay-and-login-magento-2-module",
@@ -1105,16 +1105,16 @@
         },
         {
             "name": "elasticsearch/elasticsearch",
-            "version": "v6.7.0",
+            "version": "v6.7.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/elastic/elasticsearch-php.git",
-                "reference": "8bde3f3b821361ec75e08a3746231d87230a2d3a"
+                "reference": "7be453dd36d1b141b779f2cb956715f8e04ac2f4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/elastic/elasticsearch-php/zipball/8bde3f3b821361ec75e08a3746231d87230a2d3a",
-                "reference": "8bde3f3b821361ec75e08a3746231d87230a2d3a",
+                "url": "https://api.github.com/repos/elastic/elasticsearch-php/zipball/7be453dd36d1b141b779f2cb956715f8e04ac2f4",
+                "reference": "7be453dd36d1b141b779f2cb956715f8e04ac2f4",
                 "shasum": ""
             },
             "require": {
@@ -1161,7 +1161,7 @@
                 "elasticsearch",
                 "search"
             ],
-            "time": "2019-04-29T15:14:22+00:00"
+            "time": "2019-05-20T14:15:55+00:00"
         },
         {
             "name": "endroid/qr-code",
@@ -1234,16 +1234,16 @@
         },
         {
             "name": "fastly/magento2",
-            "version": "1.2.99",
+            "version": "1.2.103",
             "source": {
                 "type": "git",
                 "url": "https://github.com/fastly/fastly-magento2.git",
-                "reference": "3b512454cfc0e456be21a84573aa0264c8655178"
+                "reference": "d08d2c3faf365a39d2c63ca1e7e601f75f4384ec"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/fastly/fastly-magento2/zipball/3b512454cfc0e456be21a84573aa0264c8655178",
-                "reference": "3b512454cfc0e456be21a84573aa0264c8655178",
+                "url": "https://api.github.com/repos/fastly/fastly-magento2/zipball/d08d2c3faf365a39d2c63ca1e7e601f75f4384ec",
+                "reference": "d08d2c3faf365a39d2c63ca1e7e601f75f4384ec",
                 "shasum": ""
             },
             "require": {
@@ -1268,7 +1268,7 @@
                 "BSD-3-Clause"
             ],
             "description": "Fastly CDN Module for Magento 2.x",
-            "time": "2019-05-03T14:46:29+00:00"
+            "time": "2019-05-21T16:16:34+00:00"
         },
         {
             "name": "google/recaptcha",
@@ -1657,7 +1657,7 @@
         },
         {
             "name": "illuminate/config",
-            "version": "v5.8.15",
+            "version": "v5.8.18",
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/config.git",
@@ -1701,7 +1701,7 @@
         },
         {
             "name": "illuminate/container",
-            "version": "v5.8.15",
+            "version": "v5.8.18",
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/container.git",
@@ -1746,16 +1746,16 @@
         },
         {
             "name": "illuminate/contracts",
-            "version": "v5.8.15",
+            "version": "v5.8.18",
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/contracts.git",
-                "reference": "0b3cbe19051c9a8c247091cc0867d3b65250d093"
+                "reference": "8e2466437516edaa30201a8b5d4eaa56fa99eacd"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/illuminate/contracts/zipball/0b3cbe19051c9a8c247091cc0867d3b65250d093",
-                "reference": "0b3cbe19051c9a8c247091cc0867d3b65250d093",
+                "url": "https://api.github.com/repos/illuminate/contracts/zipball/8e2466437516edaa30201a8b5d4eaa56fa99eacd",
+                "reference": "8e2466437516edaa30201a8b5d4eaa56fa99eacd",
                 "shasum": ""
             },
             "require": {
@@ -1786,20 +1786,20 @@
             ],
             "description": "The Illuminate Contracts package.",
             "homepage": "https://laravel.com",
-            "time": "2019-04-21T18:51:09+00:00"
+            "time": "2019-05-15T00:29:13+00:00"
         },
         {
             "name": "illuminate/support",
-            "version": "v5.8.15",
+            "version": "v5.8.18",
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/support.git",
-                "reference": "7fbf8d76946ee53587955b670bd8a47e3d48e854"
+                "reference": "eb6ad85fd80163fdaa5b97983e0e32d811128242"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/illuminate/support/zipball/7fbf8d76946ee53587955b670bd8a47e3d48e854",
-                "reference": "7fbf8d76946ee53587955b670bd8a47e3d48e854",
+                "url": "https://api.github.com/repos/illuminate/support/zipball/eb6ad85fd80163fdaa5b97983e0e32d811128242",
+                "reference": "eb6ad85fd80163fdaa5b97983e0e32d811128242",
                 "shasum": ""
             },
             "require": {
@@ -1847,7 +1847,7 @@
             ],
             "description": "The Illuminate Support package.",
             "homepage": "https://laravel.com",
-            "time": "2019-04-25T14:06:24+00:00"
+            "time": "2019-05-17T18:49:15+00:00"
         },
         {
             "name": "justinrainbow/json-schema",
@@ -2257,12 +2257,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/magento/ece-tools.git",
-                "reference": "b2896cc57424cd9cbcf4df70b5d5b61485018c79"
+                "reference": "ee1c3ab7ddcb1f6a28262e06b78da5f9c22090f7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/magento/ece-tools/zipball/b2896cc57424cd9cbcf4df70b5d5b61485018c79",
-                "reference": "b2896cc57424cd9cbcf4df70b5d5b61485018c79",
+                "url": "https://api.github.com/repos/magento/ece-tools/zipball/ee1c3ab7ddcb1f6a28262e06b78da5f9c22090f7",
+                "reference": "ee1c3ab7ddcb1f6a28262e06b78da5f9c22090f7",
                 "shasum": ""
             },
             "require": {
@@ -2367,7 +2367,7 @@
                 "source": "https://github.com/magento/ece-tools/tree/2002.0",
                 "issues": "https://github.com/magento/ece-tools/issues"
             },
-            "time": "2019-05-06T20:32:50+00:00"
+            "time": "2019-05-23T19:06:43+00:00"
         },
         {
             "name": "magento/framework",
@@ -14204,16 +14204,16 @@
         },
         {
             "name": "nesbot/carbon",
-            "version": "2.17.1",
+            "version": "2.18.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/briannesbitt/Carbon.git",
-                "reference": "96acbc0c03782e8115156dd4dd8b736267155066"
+                "reference": "8322b7bd1805be31867c13bf3cdaab948a0dd406"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/briannesbitt/Carbon/zipball/96acbc0c03782e8115156dd4dd8b736267155066",
-                "reference": "96acbc0c03782e8115156dd4dd8b736267155066",
+                "url": "https://api.github.com/repos/briannesbitt/Carbon/zipball/8322b7bd1805be31867c13bf3cdaab948a0dd406",
+                "reference": "8322b7bd1805be31867c13bf3cdaab948a0dd406",
                 "shasum": ""
             },
             "require": {
@@ -14260,7 +14260,7 @@
                 "datetime",
                 "time"
             ],
-            "time": "2019-04-27T18:04:27+00:00"
+            "time": "2019-05-16T18:44:35+00:00"
         },
         {
             "name": "oyejorge/less.php",
@@ -14433,16 +14433,16 @@
         },
         {
             "name": "paragonie/sodium_compat",
-            "version": "v1.9.1",
+            "version": "v1.10.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/paragonie/sodium_compat.git",
-                "reference": "87125d5b265f98c4d1b8d83a1f0726607c229421"
+                "reference": "228a9fc64cf4ba84c7967c1076d94209db03e0ee"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/paragonie/sodium_compat/zipball/87125d5b265f98c4d1b8d83a1f0726607c229421",
-                "reference": "87125d5b265f98c4d1b8d83a1f0726607c229421",
+                "url": "https://api.github.com/repos/paragonie/sodium_compat/zipball/228a9fc64cf4ba84c7967c1076d94209db03e0ee",
+                "reference": "228a9fc64cf4ba84c7967c1076d94209db03e0ee",
                 "shasum": ""
             },
             "require": {
@@ -14511,7 +14511,7 @@
                 "secret-key cryptography",
                 "side-channel resistant"
             ],
-            "time": "2019-03-20T17:19:05+00:00"
+            "time": "2019-05-13T16:04:50+00:00"
         },
         {
             "name": "pelago/emogrifier",
@@ -15391,16 +15391,16 @@
         },
         {
             "name": "symfony/contracts",
-            "version": "v1.0.2",
+            "version": "v1.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/contracts.git",
-                "reference": "1aa7ab2429c3d594dd70689604b5cf7421254cdf"
+                "reference": "d3636025e8253c6144358ec0a62773cae588395b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/contracts/zipball/1aa7ab2429c3d594dd70689604b5cf7421254cdf",
-                "reference": "1aa7ab2429c3d594dd70689604b5cf7421254cdf",
+                "url": "https://api.github.com/repos/symfony/contracts/zipball/d3636025e8253c6144358ec0a62773cae588395b",
+                "reference": "d3636025e8253c6144358ec0a62773cae588395b",
                 "shasum": ""
             },
             "require": {
@@ -15408,19 +15408,22 @@
             },
             "require-dev": {
                 "psr/cache": "^1.0",
-                "psr/container": "^1.0"
+                "psr/container": "^1.0",
+                "symfony/polyfill-intl-idn": "^1.10"
             },
             "suggest": {
                 "psr/cache": "When using the Cache contracts",
                 "psr/container": "When using the Service contracts",
                 "symfony/cache-contracts-implementation": "",
+                "symfony/event-dispatcher-implementation": "",
+                "symfony/http-client-contracts-implementation": "",
                 "symfony/service-contracts-implementation": "",
                 "symfony/translation-contracts-implementation": ""
             },
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.0-dev"
+                    "dev-master": "1.1-dev"
                 }
             },
             "autoload": {
@@ -15455,7 +15458,7 @@
                 "interoperability",
                 "standards"
             ],
-            "time": "2018-12-05T08:06:11+00:00"
+            "time": "2019-04-27T14:29:50+00:00"
         },
         {
             "name": "symfony/css-selector",
@@ -16407,16 +16410,16 @@
         },
         {
             "name": "twig/twig",
-            "version": "v2.9.0",
+            "version": "v2.10.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/twigphp/Twig.git",
-                "reference": "82a1c055c8ed4c4705023bfd0405f3c74db6e3ae"
+                "reference": "5240e21982885b76629552d83b4ebb6d41ccde6b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/twigphp/Twig/zipball/82a1c055c8ed4c4705023bfd0405f3c74db6e3ae",
-                "reference": "82a1c055c8ed4c4705023bfd0405f3c74db6e3ae",
+                "url": "https://api.github.com/repos/twigphp/Twig/zipball/5240e21982885b76629552d83b4ebb6d41ccde6b",
+                "reference": "5240e21982885b76629552d83b4ebb6d41ccde6b",
                 "shasum": ""
             },
             "require": {
@@ -16432,7 +16435,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "2.9-dev"
+                    "dev-master": "2.10-dev"
                 }
             },
             "autoload": {
@@ -16470,7 +16473,7 @@
             "keywords": [
                 "templating"
             ],
-            "time": "2019-04-28T06:57:38+00:00"
+            "time": "2019-05-14T12:03:52+00:00"
         },
         {
             "name": "vertex/module-tax",
@@ -18840,8 +18843,8 @@
     "packages-dev": [],
     "aliases": [
         {
-            "alias": "2002.0.18",
-            "alias_normalized": "2002.0.18.0",
+            "alias": "2002.0.19",
+            "alias_normalized": "2002.0.19.0",
             "version": "2002.0.9999999.9999999-dev",
             "package": "magento/ece-tools"
         }
