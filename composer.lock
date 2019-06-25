@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "db8cca104f6c090d2ee0649c30ec46f2",
+    "content-hash": "d824b3ea7dadc5a91b42f19da8c2375f",
     "packages": [
         {
             "name": "amzn/amazon-pay-and-login-magento-2-module",
@@ -2258,30 +2258,41 @@
         },
         {
             "name": "magento/ece-tools",
-            "version": "2002.0.19",
+            "version": "2002.0.x-dev",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/magento/ece-tools.git",
+                "reference": "d2942210fc101a73e75a9b0a7eaeb58d24c72da3"
+            },
             "dist": {
                 "type": "zip",
-                "url": "https://repo.magento.com/archives/magento/ece-tools/magento-ece-tools-2002.0.19.0.zip",
-                "reference": null,
-                "shasum": "42c4f358eea4921ae823818561f2be262f1d9e07"
+                "url": "https://api.github.com/repos/magento/ece-tools/zipball/d2942210fc101a73e75a9b0a7eaeb58d24c72da3",
+                "reference": "d2942210fc101a73e75a9b0a7eaeb58d24c72da3",
+                "shasum": ""
             },
             "require": {
                 "composer/composer": "@stable",
                 "composer/semver": "^1.4",
                 "ext-json": "*",
                 "ext-pdo": "*",
+                "ext-sockets": "*",
                 "graylog2/gelf-php": "^1.4.2",
                 "guzzlehttp/guzzle": "^6.2",
                 "illuminate/config": "^5.5",
                 "illuminate/container": "^5.5",
                 "illuminate/contracts": "^5.5",
+                "magento/magento-cloud-components": "^1.0",
                 "monolog/monolog": "^1.16",
                 "php": "^7.0",
                 "psr/container": "^1.0",
                 "psr/log": "^1.0",
                 "symfony/console": "^2.6||^4.0",
-                "symfony/yaml": "^3.3",
+                "symfony/process": "~2.1||~4.1.0",
+                "symfony/yaml": "^3.3||^4.0",
                 "twig/twig": "^1.0||^2.0"
+            },
+            "conflict": {
+                "nesbot/carbon": ">=1.38 <2.0"
             },
             "replace": {
                 "magento/ece-patches": "*",
@@ -2294,8 +2305,7 @@
                 "phpmd/phpmd": "@stable",
                 "phpunit/php-code-coverage": "^5.2",
                 "phpunit/phpunit": "^6.2",
-                "squizlabs/php_codesniffer": " ^3.0",
-                "symfony/process": "^3.4"
+                "squizlabs/php_codesniffer": "^3.0"
             },
             "bin": [
                 "bin/ece-tools",
@@ -2311,29 +2321,35 @@
                         ".magento.env.yaml.dist"
                     ],
                     [
-                        "dist/Makefile",
-                        "Makefile"
+                        "dist/docker-sync.yml",
+                        "docker-sync.yml"
+                    ],
+                    [
+                        "dist/mutagen.sh",
+                        "mutagen.sh"
                     ],
                     [
                         "dist/docker/mnt",
-                        "docker/mnt"
+                        ".docker/mnt"
                     ],
                     [
                         "dist/docker/tmp",
-                        "docker/tmp"
+                        ".docker/tmp"
                     ],
                     [
                         "dist/docker/mysql",
-                        "docker/mysql"
+                        ".docker/mysql"
                     ],
                     [
-                        "dist/docker/README.md",
-                        "docker/README.md"
-                    ],
-                    [
-                        "dist/docker-sync.yml",
-                        "docker-sync.yml"
+                        "dist/docker/bin/docker",
+                        "bin/docker"
                     ]
+                ],
+                "chmod": [
+                    {
+                        "mask": "0755",
+                        "path": "bin/docker"
+                    }
                 ]
             },
             "autoload": {
@@ -2341,10 +2357,45 @@
                     "Magento\\MagentoCloud\\": "src/"
                 }
             },
+            "autoload-dev": {
+                "psr-4": {
+                    "Magento\\MagentoCloud\\Test\\": "tests/static/",
+                    "Magento\\MagentoCloud\\Test\\Integration\\": "tests/integration/",
+                    "Magento\\MagentoCloud\\Test\\Functional\\": "tests/functional/"
+                }
+            },
+            "scripts": {
+                "test": [
+                    "@phpcs",
+                    "@phpmd",
+                    "@phpunit",
+                    "@coverage"
+                ],
+                "phpcs": [
+                    "phpcs src --standard=tests/static/phpcs-ruleset.xml -p -n"
+                ],
+                "phpmd": [
+                    "phpmd src xml tests/static/phpmd-ruleset.xml"
+                ],
+                "phpunit": [
+                    "phpunit --configuration tests/unit"
+                ],
+                "coverage": [
+                    "phpunit --configuration tests/unit --coverage-clover tests/unit/tmp/clover.xml && php tests/unit/code-coverage.php tests/unit/tmp/clover.xml"
+                ],
+                "coverage-generate": [
+                    "phpunit --configuration tests/unit --coverage-html tests/unit/tmp/coverage"
+                ]
+            },
             "license": [
                 "OSL-3.0"
             ],
-            "description": "Provides tools to build and deploy Magento 2 Enterprise Edition"
+            "description": "Provides tools to build and deploy Magento 2 Enterprise Edition",
+            "support": {
+                "source": "https://github.com/magento/ece-tools/tree/2002.0",
+                "issues": "https://github.com/magento/ece-tools/issues"
+            },
+            "time": "2019-06-25T21:41:35+00:00"
         },
         {
             "name": "magento/framework",
@@ -2773,6 +2824,33 @@
                 "AFL-3.0"
             ],
             "description": "Chinese (China) language"
+        },
+        {
+            "name": "magento/magento-cloud-components",
+            "version": "1.0.0",
+            "dist": {
+                "type": "zip",
+                "url": "https://repo.magento.com/archives/magento/magento-cloud-components/magento-magento-cloud-components-1.0.0.0.zip",
+                "reference": null,
+                "shasum": "46bff92612875bee0f2cd300c64d8cb81639fa77"
+            },
+            "require": {
+                "ext-json": "*",
+                "magento/framework": "*",
+                "magento/module-store": "*",
+                "magento/module-url-rewrite": "*",
+                "php": "^7.0"
+            },
+            "type": "magento2-module",
+            "autoload": {
+                "files": [
+                    "registration.php"
+                ],
+                "psr-4": {
+                    "Magento\\CloudComponents\\": ""
+                }
+            },
+            "description": "Cloud Components Module for Magento 2.x"
         },
         {
             "name": "magento/magento-cloud-metapackage",
@@ -16494,20 +16572,20 @@
         },
         {
             "name": "symfony/yaml",
-            "version": "v3.4.28",
+            "version": "v4.3.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/yaml.git",
-                "reference": "212a27b731e5bfb735679d1ffaac82bd6a1dc996"
+                "reference": "c60ecf5ba842324433b46f58dc7afc4487dbab99"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/yaml/zipball/212a27b731e5bfb735679d1ffaac82bd6a1dc996",
-                "reference": "212a27b731e5bfb735679d1ffaac82bd6a1dc996",
+                "url": "https://api.github.com/repos/symfony/yaml/zipball/c60ecf5ba842324433b46f58dc7afc4487dbab99",
+                "reference": "c60ecf5ba842324433b46f58dc7afc4487dbab99",
                 "shasum": ""
             },
             "require": {
-                "php": "^5.5.9|>=7.0.8",
+                "php": "^7.1.3",
                 "symfony/polyfill-ctype": "~1.8"
             },
             "conflict": {
@@ -16522,7 +16600,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "3.4-dev"
+                    "dev-master": "4.3-dev"
                 }
             },
             "autoload": {
@@ -16549,7 +16627,7 @@
             ],
             "description": "Symfony Yaml Component",
             "homepage": "https://symfony.com",
-            "time": "2019-03-25T07:48:46+00:00"
+            "time": "2019-04-06T14:04:46+00:00"
         },
         {
             "name": "tedivm/jshrink",
@@ -19194,9 +19272,18 @@
         }
     ],
     "packages-dev": [],
-    "aliases": [],
+    "aliases": [
+        {
+            "alias": "2002.0.20",
+            "alias_normalized": "2002.0.20.0",
+            "version": "2002.0.9999999.9999999-dev",
+            "package": "magento/ece-tools"
+        }
+    ],
     "minimum-stability": "alpha",
-    "stability-flags": [],
+    "stability-flags": {
+        "magento/ece-tools": 20
+    },
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": [],

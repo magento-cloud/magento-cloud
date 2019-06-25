@@ -11,14 +11,19 @@
         "preferred-install": "dist",
         "sort-packages": true
     },
-    "repositories": {
-        "repo": {
+    "repositories": [
+        {
             "type": "composer",
-            "url": "https://repo.magento.com"
+            "url": "https://repo.magento.com/"
+        },
+        {
+            "type": "vcs",
+            "url": "https://github.com/magento/ece-tools"
         }
-    },
+    ],
     "require": {
-        "magento/magento-cloud-metapackage": ">=2.3.2 <2.3.3"
+        "magento/magento-cloud-metapackage": ">=2.3.2 <2.3.3",
+        "magento/ece-tools": "2002.0.x-dev as 2002.0.20"
     },
     "suggest": {
         "ext-pcntl": "Need for run processes in parallel mode"
