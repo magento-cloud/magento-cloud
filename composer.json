@@ -11,14 +11,16 @@
         {
             "type": "composer",
             "url": "https://repo.magento.com/"
+        },
+        {
+            "type": "vcs",
+            "url": "https://github.com/magento/ece-tools"
         }
     ],
     "require": {
         "magento/magento-cloud-metapackage": ">=2.1.18 <2.1.19",
+        "magento/ece-tools": "2002.0.x-dev as 2002.0.20",
         "fastly/magento2": "1.2.103"
-    },
-    "conflict": {
-        "nesbot/carbon": ">=1.38 <2.0"
     },
     "config": {
         "use-include-path": true
