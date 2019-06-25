@@ -7,17 +7,19 @@
         "OSL-3.0",
         "AFL-3.0"
     ],
-    "repositories": {
-        "repo": {
+    "repositories": [
+        {
             "type": "composer",
-            "url": "https://repo.magento.com"
+            "url": "https://repo.magento.com/"
+        },
+        {
+            "type": "vcs",
+            "url": "https://github.com/magento/ece-tools"
         }
-    },
+    ],
     "require": {
-        "magento/magento-cloud-metapackage": ">=2.2.9 <2.2.10"
-    },
-    "conflict": {
-        "nesbot/carbon": ">=1.38 <2.0"
+        "magento/magento-cloud-metapackage": ">=2.2.9 <2.2.10",
+        "magento/ece-tools": "2002.0.x-dev as 2002.0.20"
     },
     "autoload": {
         "psr-4": {
